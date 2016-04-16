@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin  
+var messages = new Array(); 
+messages[0] = "LosAngeles";
+messages[1] = "Boston";
+messages[2] = "NewYork";  
+messages[3] = "Chicago";
+messages[4] = "Miami";
+
+function messageReveal() { 
+	var messageindex = document.form.city.selectedIndex;
+
+	helpmsg = messages[messageindex];
+
+	if (document.form.cities.value == "")
+	{
+		document.form.cities.value = helpmsg
+	}
+	else
+	{
+		document.form.cities.value = document.form.cities.value + "," + helpmsg
+	}
+}
+// End -->
+</SCRIPT>
+
+<head>
+	Chanllenge
+</head>
+
+<div>
+<form name = "form" action = '/' method = 'post'>
+	<table border="0">
+		<tr>
+	      <td>Name</td>
+          <td><input type = "text" name = "name"></td>
+          <td>Age</td>
+          <td><input type = "text" name = "agefrom">to<input type = "text" name = "ageto"></td>
+        </tr>
+        <tr>
+          <td>Favourite city</td>
+          <td>
+            <input type = "text" name = "cities" readonly="true">
+            <select name="city" OnChange="messageReveal()">
+				<option value="LosAngeles">LosAngeles</option>
+				<option value="Boston">Boston</option>
+				<option value="NewYork">NewYork</option>
+				<option value="Chicago">Chicago</option>
+				<option value="Miami">Miami</option>
+            </select>
+            add
+          </td>
+          <td>Favourite time</td>
+          <td>
+            <input type = "text" name = "time" readonly="true">
+            <select name="hour">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+            </select>
+            :
+            <select name="minute">
+				<option value="00">00</option>
+				<option value="30">30</option>
+            </select>
+            add
+          </td>
+        </tr>
+        <tr>
+          <td><input type = "submit" value = "submit"></td>
+        </tr>
+
+</table>
+</form>
+</div>
+<br/>
+
+<div>
+	<table border="1">
+		<tbody>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Age
+				</th>
+				<th>
+					Favourites
+				</th>
+			</tr>
+			<% for(i=0; i< userlist.length; i++) {%>
+			<tr>
+				<td>
+					<%= userlist[i]["name"] %>
+				</td>
+				<td>
+					<%= userlist[i]["age"] %>
+				</td>
+				<td>
+					<%= userlist[i]["favourites"]["cities"] %><br>
+				</td>
+			</tr>
+			<% } %> 
+
+		</tbody>
+	</table>
+</div>
+
+</html>
