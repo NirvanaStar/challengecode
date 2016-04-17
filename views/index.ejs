@@ -4,24 +4,22 @@
 <SCRIPT LANGUAGE="JavaScript">
 <!-- Begin  
 var messages = new Array(); 
-messages[0] = "LosAngeles";
+messages[0] = "LA";
 messages[1] = "Boston";
-messages[2] = "NewYork";  
+messages[2] = "nyc";  
 messages[3] = "Chicago";
 messages[4] = "Miami";
 
 function messageReveal() { 
-	var messageindex = document.form.city.selectedIndex;
+	var messageindex = document.form.cities.selectedIndex;
 
 	helpmsg = messages[messageindex];
 
-	if (document.form.cities.value == "")
-	{
-		document.form.cities.value = helpmsg
+	if (document.form.city.value == ""){
+		document.form.city.value = helpmsg;
 	}
-	else
-	{
-		document.form.cities.value = document.form.cities.value + "," + helpmsg
+	else{
+		document.form.city.value += ", " + helpmsg;
 	}
 }
 // End -->
@@ -31,6 +29,7 @@ function messageReveal() {
 	Chanllenge
 </head>
 
+<body>
 <div>
 <form name = "form" action = '/users' method = 'post'>
 	<table border="0">
@@ -43,11 +42,11 @@ function messageReveal() {
         <tr>
           <td>Favourite city</td>
           <td>
-            <input type = "text" name = "cities" readonly="true">
-            <select name="city" OnChange="messageReveal()">
-				<option value="LosAngeles">LosAngeles</option>
+            <input type = "text" name = "city" readonly="true">
+            <select name="cities" OnChange="messageReveal()">
+				<option value="LA">LA</option>
 				<option value="Boston">Boston</option>
-				<option value="NewYork">NewYork</option>
+				<option value="nyc">nyc</option>
 				<option value="Chicago">Chicago</option>
 				<option value="Miami">Miami</option>
             </select>
@@ -110,5 +109,6 @@ function messageReveal() {
 		</tbody>
 	</table>
 </div>
+</body>
 
 </html>
