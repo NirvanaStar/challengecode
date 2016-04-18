@@ -3,17 +3,18 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 <!-- Begin  
-var messages = new Array(); 
-messages[0] = "LA";
-messages[1] = "Boston";
-messages[2] = "nyc";  
-messages[3] = "Chicago";
-messages[4] = "Miami";
+var citymessages = new Array(); 
+citymessages[0] = "";
+citymessages[1] = "LA";
+citymessages[2] = "Boston";
+citymessages[3] = "nyc";  
+citymessages[4] = "Chicago";
+citymessages[5] = "Miami";
 
-function messageReveal() { 
+function cityMessageReveal() { 
 	var messageindex = document.form.cities.selectedIndex;
 
-	helpmsg = messages[messageindex];
+	helpmsg = citymessages[messageindex];
 
 	if (document.form.city.value == ""){
 		document.form.city.value = helpmsg;
@@ -22,6 +23,17 @@ function messageReveal() {
 		document.form.city.value += ", " + helpmsg;
 	}
 }
+
+function timeMessageReveal(){
+	var hour = document.form.hour.selectedIndex;
+}
+
+new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue.js!'
+  }
+})
 // End -->
 </SCRIPT>
 
@@ -30,32 +42,36 @@ function messageReveal() {
 </head>
 
 <body>
+<div id = "app">
+	{{ message }}
+</div>
 <div>
-<form name = "form" action = '/users' method = 'post'>
+<form id="form" name = "form" method = 'post'>
 	<table border="0">
 		<tr>
 	      <td>Name</td>
-          <td><input type = "text" name = "name"></td>
+          <td><input type = "text" id="name" name = "name"></td>
           <td>Age</td>
-          <td><input type = "text" name = "agefrom">to<input type = "text" name = "ageto"></td>
+          <td><input type = "text" id="agefrom" name = "agefrom">to<input type = "text" id="ageto" name = "ageto"></td>
         </tr>
         <tr>
           <td>Favourite city</td>
           <td>
-            <input type = "text" name = "city" readonly="true">
-            <select name="cities" OnChange="messageReveal()">
-				<option value="LA">LA</option>
+            <input type = "text" id="city" name = "city" readonly="true">
+            <select name="cities" OnChange="cityMessageReveal()">
+            	<option></option>
+            	<option value="LA">LA</option>
 				<option value="Boston">Boston</option>
 				<option value="nyc">nyc</option>
 				<option value="Chicago">Chicago</option>
 				<option value="Miami">Miami</option>
             </select>
-            add
           </td>
           <td>Favourite time</td>
           <td>
-            <input type = "text" name = "time" readonly="true">
-            <select name="hour">
+            <input type = "text" id="times" name = "times" readonly="true">
+            <select name="hour", OnChange="timeMessageReveal()">
+            	<option></option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -63,6 +79,7 @@ function messageReveal() {
             </select>
             :
             <select name="minute">
+            	<option></option>
 				<option value="00">00</option>
 				<option value="30">30</option>
             </select>
@@ -70,7 +87,8 @@ function messageReveal() {
           </td>
         </tr>
         <tr>
-          <td><input type = "submit" value = "submit"></td>
+          <td><input type = "reset" value = "Reset"></td>
+          <td><input type = "submit" id="sub" value = "Submit"></td>
         </tr>
 
 </table>
@@ -102,6 +120,7 @@ function messageReveal() {
 				</td>
 				<td>
 					<%= userlist[i]["favourites"]["cities"] %><br>
+					<%= userlist[i]["favourites"]["times"] %><br>
 				</td>
 			</tr>
 			<% } %> 
@@ -110,5 +129,10 @@ function messageReveal() {
 	</table>
 </div>
 </body>
-
+<footer>
+	<script src="/js/plugins/jquery.min.js"></script>
+	<script src="/js/plugins/bootstrap.min.js"></script>
+	<script src="/js/users.js"></script>
+	<script src="/js/plugins/vue.min.js"></script>
+</footer>
 </html>

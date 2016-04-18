@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     .find()
     .exec()
     .then(function(users) {
-      res.render('index', {userlist: users});
+      res.render('index', {userlist: users})
     })
     .catch(function(err) {
       console.log(err);
@@ -21,22 +21,28 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   var query = {};
   var data = req.body;
-
+  console.log(data);
   var name = data['name'] || "";
   var agefrom = data['agefrom'] || 0;
   var ageto = data['ageto'] || 100;
-  var city = data['city'].split(',') || "";
-  /*var times = data['times'] || "";*/
+  var cities = data['cities'] || "";
+  var times = data['times'] || "";
 
   query['name'] = new RegExp(name);
-  query['age'] = {$gt: agefrom, $lt: ageto};
-  query['favourites.cities'] = {$in: city}
+  query['age'] = {$gte: agefrom, $lte: ageto};
+  if (cities != ""){
+    var cities = cities.split(',');
+    query['favourites.cities'] = {$in: cities};
+  }
+  if (times != ""){
+    var times = times.split(',');
+    query['favourites.cities'] = {$in: times};
+  }
 
   Users
       .find(query)
       .exec()
       .then(function(users) {
-        // users.name = 
         res.render('index', {userlist: users});
       })
       .catch(function(err) {
@@ -45,6 +51,17 @@ router.post('/', function(req, res) {
     });
 });
 
+//
+router.get('/tags', function(req, res, next) {
+  client.zrevrangebyscore('tags:news', '+inf', '-inf', function(err, tags) {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(tags);
+    }
+  });
+});
 
 
 module.exports = router;
