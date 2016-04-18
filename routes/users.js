@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   var query = {};
   var data = req.body;
-
+  console.log(data);
   var name = data['name'] || "";
   var agefrom = data['agefrom'] || 0;
   var ageto = data['ageto'] || 100;
@@ -50,18 +50,5 @@ router.post('/', function(req, res) {
       res.render('error', {err: err});
     });
 });
-
-//
-router.get('/tags', function(req, res, next) {
-  client.zrevrangebyscore('tags:news', '+inf', '-inf', function(err, tags) {
-    if (err) {
-      console.log(err);
-      res.status(400).send(err);
-    } else {
-      res.status(200).send(tags);
-    }
-  });
-});
-
 
 module.exports = router;
