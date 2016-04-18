@@ -67,18 +67,20 @@ new Vue({
           <td>Favourite time</td>
           <td>
             <input type = "text" id="times" name = "times">
-            	<div class="ui-timepicker-wrapper ui-timepicker-positioned-top optional-custom-classname" tabindex="-1">
-    			<ul class="ui-timepicker-list">
-			        <li class="ui-timepicker-am">12:00am</li>
-			        <li class="ui-timepicker-pm">4:30pm</li>
-			        <li class="ui-timepicker-pm ui-timepicker-selected">5:00pm</li>
-			        <li class="ui-timepicker-pm ui-timepicker-disabled">5:30pm</li>
-			        <li class="ui-timepicker-pm">6:00pm <span class="ui-timepicker-duration">(1 hour)</span></li>
-	        		<li class="ui-timepicker-pm">6:30pm</li>
-
-        			<li class="ui-timepicker-pm">11:30pm</li>
-    			</ul>
-			</div>
+            <select name="hour", OnChange="timeMessageReveal()">
+            	<option></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+            </select>
+            :
+            <select name="minute">
+            	<option></option>
+				<option value="00">00</option>
+				<option value="30">30</option>
+            </select>
+            add
           </td>
         </tr>
         <tr>
