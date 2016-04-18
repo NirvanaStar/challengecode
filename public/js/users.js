@@ -1,22 +1,27 @@
-/*$(document).ready(function(){
-  $('#sub').click(function(){
-    $('#form').submitForm({
-      url: "/users",
-      data:{
-        name = $("#name").val(),
-        agefrom = $("#agefrom").val(),
-        ageto = $("#ageto").val(),
-        cities = $("#city").val(),
-        times = "1:0000"
-      },
-      dataType:'json',
-      type: 'POST'
-    }).submit();
-  })
-});*/
+$("#sub").on("click", function () {  
+                var params = $("#form").serializeArray();  
+                var j = {};  
+                for (var item in params) {  
+                    j[params[item].name] = params[item].value;  
+                }  
+  
+                $.ajax({  
+                    url:'/',  
+                    data:JSON.stringify(j),  
+                    type:'post',  
+                    dataType:'json',  
+                    headers:{  
+                        Accept:"application/json",  
+                        "Content-Type":"application/json"  
+                    },  
+                    processData:false,  
+                    cache:false  
+                }).done(function (data) {  
+                        });  
+  
+            });  
 
-
-
+/*
 $('#sub').click(function(){
   console.log("submit click");
   var name = $("#name").val();
@@ -26,5 +31,5 @@ $('#sub').click(function(){
   var times = "1:0000";
 
   $("#form").submit();
-});
+});*/
 
