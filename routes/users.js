@@ -18,16 +18,19 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
 router.post('/', function(req, res) {
   var query = {};
   var data = req.body;
-  console.log(data);
+
+  // get param from request
   var name = data['name'] || "";
   var agefrom = data['agefrom'] || 0;
   var ageto = data['ageto'] || 100;
   var cities = data['cities'] || "";
   var times = data['times'] || "";
 
+  // set query condition
   query['name'] = new RegExp(name);
   query['age'] = {$gte: agefrom, $lte: ageto};
   if (cities != ""){
@@ -36,7 +39,7 @@ router.post('/', function(req, res) {
   }
   if (times != ""){
     var times = times.split(',');
-    query['favourites.cities'] = {$in: times};
+    query['favourites.times'] = {$in: times};
   }
 
   Users
