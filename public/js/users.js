@@ -1,25 +1,17 @@
-$("#sub").on("click", function () {  
-                var params = $("#form").serializeArray();  
-                var j = {};  
-                for (var item in params) {  
-                    j[params[item].name] = params[item].value;  
-                }  
-  
-                $.ajax({  
-                    url:'/',  
-                    data:JSON.stringify(j),  
-                    type:'post',  
-                    dataType:'json',  
-                    headers:{  
-                        Accept:"application/json",  
-                        "Content-Type":"application/json"  
-                    },  
-                    processData:false,  
-                    cache:false  
-                }).done(function (data) {  
-                        });  
-  
-            });  
+$("#sub").on("click", function(){
+  var data = $("#form").serialize;  
+
+  $.ajax({  
+    url:'/users',  
+    data: data,  
+    method:'POST',  
+    dataType:'json',  
+    success: function(data, textStatus, jqXHR){
+      console.log(data);
+    }
+  });  
+});  
+                
 
 /*
 $('#sub').click(function(){

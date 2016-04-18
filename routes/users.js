@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   var query = {};
   var data = req.body;
-  console.log(data);
+
   var name = data['name'] || "";
   var agefrom = data['agefrom'] || 0;
   var ageto = data['ageto'] || 100;
@@ -43,7 +43,7 @@ router.post('/', function(req, res) {
       .find(query)
       .exec()
       .then(function(users) {
-        res.render('index', {userlist: users});
+        res.send(200, JSON.stringify(users));
       })
       .catch(function(err) {
       console.log(err);
